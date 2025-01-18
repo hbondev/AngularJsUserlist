@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" ng-app="userlist">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="./src/assets/fonts/fontAwesome/css/font-awesome.css">
+<link rel="stylesheet" href="./src/utilities/bootstrap/css/bootstrap.min.rtl.css">
+<link rel="stylesheet" href="./src/utilities/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./src/css/main.css">
+<link rel="stylesheet" href="./src/css/loader.css">
+<base href="/">
+
+<title>Userlist</title>
+</head>
+
+<body>
+<div ng-controller="mylistController">
+    <span class="loadingWrapper" ng-if="Loading">
+        <div class="loader"></div>
+    </span>
+    <!-- <span ng-include="'./src/pages/authentication.html'" ></span> -->
+
+    <!-- <span ng-include="'./src/pages/createUser.html'" ></span> -->
+    <!-- <span ng-include="'./src/pages/users.html'"></span> -->
+    
+        <div ng-view></div>
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./src/utilities/AngularJs/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-cookies.min.js"></script>
+<script src="./src/utilities/AngularJs/router.js"></script>
+<script src="./src/js/main.js"></script>
+<script src="./src/js/services/route.js"></script>
+<script src="./src/js/services/checkCookie.js"></script>
+<script src="./src/js/controllers/login.js"></script>
+<script src="./src/js/controllers/createuser.js"></script>
+<script src="./src/js/controllers/userlist.js"></script>
+
+
+
+
+</body>
+
+</html>
