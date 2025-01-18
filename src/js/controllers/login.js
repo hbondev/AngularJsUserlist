@@ -1,10 +1,26 @@
 myApp.controller("loginController", ['$scope', '$location', '$http', 'checkCookie', function ($scope, $location, $http, checkCookie) {
-  const API_URL = "api/user/create-session";
-  $scope.password = '';
-  $scope.mobile = ''; 
-  $scope.alert = '';
-  var token = checkCookie.checkTokenCookie(); 
-  $scope.checkUser = function () {
+const API_URL = "api/user/create-session";
+$scope.password = '';
+$scope.mobile = ''; 
+$scope.alert = '';
+var token = checkCookie.checkTokenCookie(); 
+console.log("Initial token:", token); // Debugging
+$scope.Auth = function () {
+  if(token != undefined){
+    $location.path('/userlist');
+  }else{
+    $location.path('/login');
+  }
+}
+$scope.checkUser = function () {
+
+    Swal.fire({
+      title: "ورود موفق",
+      text: "خوش آمدید",
+      icon: "success",
+      confirmButtonText: "بسیار خب"
+    });
+    $location.path('/userlist');
     var context = {
       "username": $scope.mobile,
       "password": $scope.password
@@ -18,32 +34,24 @@ myApp.controller("loginController", ['$scope', '$location', '$http', 'checkCooki
       },
       data: context
     };
-
-    if (token) {
+    $http(req).then((res) => {
+      if (res.status === 200 ) {
+        checkCookie.setToken(res.data.token);
+        console.log("Token set:", res.data.token); // Debugging
+        $location.path('/users');
+      } else {
+        $scope.alert = "اطلاعات اشتباه درج شده است";
+      }
+    }, (error) => {
+      console.log("Error:", error); 
       Swal.fire({
-        title: "ورود موفق",
-        text: "خوش آمدید",
-        icon: "success",
-        confirmButtonText: "بسیار خب"
+        title: "خطا",
+        text: "مشکلی رخ داده است. لطفا دوباره تلاش کنید.",
+        icon: "error",
+        confirmButtonText: "باشه"
       });
-      $location.path('/userlist')
-    } else {
-      $http(req).then((res) => {
-        if (res.status === 200 && res.data.status === true) {
-          checkCookie.setToken(res.data.token); 
-          $location.path('/users');
-        } else {
-          $scope.alert = "اطلاعات اشتباه درج شده است";
-        }
-      }, (error) => {
-        console.log("Error:", error); 
-        Swal.fire({
-          title: "خطا",
-          text: "مشکلی رخ داده است. لطفا دوباره تلاش کنید.",
-          icon: "error",
-          confirmButtonText: "باشه"
-        });
-      });
-    }
-  };
+    });
+  
+};
+$scope.Auth();
 }]);
