@@ -1,8 +1,12 @@
-myApp.service('checkCookie', ['$cookies', function ($cookies) {
+myApp.service('checkCookie', ['$cookies', '$location', function ($cookies, $location) {
     this.checkTokenCookie = function () {
-        return $cookies.get('token');
+        const token = $cookies.get('token');
+        if (!token) {
+            $location.path('/login'); 
+        }
+        return token;
     };
-    this.setToken = function(token){
-        return $cookies.set('token',token);
-    }
+    this.setToken = function(token) {
+        return $cookies.put('token', token);
+    };
 }]);
