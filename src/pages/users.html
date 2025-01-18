@@ -36,12 +36,15 @@
         </thead>
         <tbody>
           <tr >
-            <td>حسین بنیادی</td>
-            <td>مرد</td>
-            <td>0910141845</td>
-            <td>hosseinbonyadi2@gmail.com</td>
-            <td class="text-center"><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </a></td>
+            <tr ng-repeat="user in users">
+              <td>{{ user.name || '-' }} </td>
+              <td>{{ user.gender || '-' }}</td>
+              <td>{{ user.mobile || '-' }}</td>
+              <td>{{ user.email || '-' }}</td>
+              <td class="text-center">
+                <a href="/api/manage/users/{{user.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+              </td>
+            </tr>
           </tr>
          
           
