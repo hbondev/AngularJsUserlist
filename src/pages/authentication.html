@@ -1,0 +1,18 @@
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;"ng-controller="loginController">
+  <div class="row">
+    <div class="col-lg-12 w-100">
+      <div class="userAuth-wrapper">
+        <h1 class="text-right userAuth-title">ورود</h1>
+        <form class="form-group" ng-submit='checkUser()'>
+          <div class="mb-3">
+            <input class="form-control" type="text" placeholder="شماره موبایل" ng-model="mobile" required>
+          </div>
+          <div class="mb-3">
+            <input class="form-control" type="password" placeholder="رمز عبور" ng-model="password" required>
+          </div>
+          <button type="submit" class="btn btn-success w-100 userAuth-btn mb-3" ng-disabled="!mobile || !password">ورود</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
