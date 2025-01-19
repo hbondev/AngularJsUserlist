@@ -1,10 +1,9 @@
-myApp.controller("editUserController", ['$scope', '$routeParams', '$http', '$location', 'checkCookie', 'userService', function($scope, $routeParams, $http, $location,  checkCookie, userService) {
+myApp.controller("editUserController", ['$scope', '$routeParams', '$http', '$location', 'checkCookie', function($scope, $routeParams, $http, $location,  checkCookie) {
   const API_URL = "/api/manage/users/" + $routeParams.id;
   let token = checkCookie.checkTokenCookie();
   $scope.model = {name:"",mobile:"",email:""};
 
   if (token) {
-    $scope.user = userService.getUserById($routeParams.id);
 
     if (!$scope.user) {
       $http({

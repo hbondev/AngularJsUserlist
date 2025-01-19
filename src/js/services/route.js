@@ -10,6 +10,10 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
             templateUrl: 'src/pages/users.html',
             controller: 'userlistController'
         })
+        .when('/users/:id', {
+            templateUrl: 'src/pages/editUser.html',
+            controller: 'editUserController'
+        })
         .when('/login', {
             templateUrl: 'src/pages/authentication.html',
             controller: 'loginController'
