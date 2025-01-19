@@ -16,38 +16,95 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="form-group pb-2">
-        <label for="firstName">نام و نام خانوادگی</label>
-        <input class="form-control" name="firstName" id="firstName" />
+  <form name="CreateForm" novalidate>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="form-group pb-2">
+          <label for="firstName">نام و نام خانوادگی</label>
+          <input class="form-control" 
+                 name="firstName" 
+                 id="firstName" 
+                 ng-model="user.name" 
+                 ng-pattern="^[\u0600-\u06FF\s]+$"
+                 required />
+          <span class="text-danger text-error d-block" ng-show="CreateForm.firstName.$invalid">
+              لطفاً فقط حروف فارسی وارد کنید.
+          </span>
+          <span class="text-success" ng-show="CreateForm.firstName.$valid"><i class="fa fa-check"></i></span>
+
+          
       </div>
-      <div class="form-group pb-4">
-        <label for="mobile">شماره موبایل</label>
-        <input class="form-control" type="text" name="mobile" id="mobile" />
+        <div class="form-group pb-2">
+          <label for="mobile">شماره موبایل</label>
+          <input class="form-control" type="text" name="mobile" id="mobile" ng-model="user.mobile" ng-pattern="/^09\d{9}$/"/>
+          <span class="text-success" ng-show="CreateForm.mobile.$valid && CreateForm.mobile.$dirty"><i class="fa fa-check"></i></span>
+          <span class="text-danger text-error d-block" ng-show="CreateForm.mobile.$invalid && CreateForm.mobile.$dirty">لطفا شماره موبایل را بدرستی وارد نمایید</span>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group authentication-password">
+          <label for="authentication-password" class="authentication-password-label">
+            رمز عبور خود را وارد کنید
+          </label>
+          <input type="password"
+                 id="authentication-password" 
+                 name="password" 
+                 class="form-control authentication-password-input" 
+                 ng-model="user.pass" 
+                 ng-pattern="/^(?=.*[a-zA-Z]).{6,}$/"
+                 required />
+          
+          <div class="text-danger"  ng-show="CreateForm.password.$invalid">
+            <span class="text-error d-block" ng-message="required">
+              رمز عبور را بنویسید.
+            </span>
+            <span  class="text-error d-block" ng-message="required">
+              رمز عبور باید حداقل ۶ کاراکتر و شامل حداقل یک حرف باشد.
+            </span>
+
+          </div>
+          <span class="text-success" ng-show="CreateForm.password.$valid"><i class="fa fa-check"></i></span>
+
+        </div>
+        <div class="form-group pb-4">
+          <label for="repeatpass">تکرار رمز عبور </label>
+          <input class="form-control" type="password" name="repeatpass" id="repeatpass" ng-model="user.repeatpass"/>
+          <span class="text-danger text-error d-block"ng-show="!user.repeatpass">{{error.repeatpass}}</span>
+          <span class="text-danger text-error d-block"ng-show="user.pass !== user.repeatpass">{{error.checkpass}}</span>
+          <span class="text-danger text-error d-block"ng-show="user.pass.$invalid" >{{error.checkpass}}</span>
+          <span class="text-success" ng-show="CreateForm.repeatpass.$invalid || CreateForm.repeatpass.$dirty"><i class="fa fa-check"></i></span>
+
+        </div>
+        
+      </div>
+      <div class="form-group">
+        <label for="email">ایمیل:</label>
+        <input type="email" 
+               id="email" 
+               name="email" 
+               class="form-control" 
+               ng-model="user.email" 
+               ng-pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" 
+               required />
+        <div class="text-danger" ng-messages="userForm.email.$error" ng-show="userForm.email.$touched">
+         
+          <span class="text-success" ng-show="CreateForm.email.$valid"><i class="fa fa-check"></i></span>
+          <span class="text-error" ng-show="CreateForm.email.$invalid">لطفاً یک ایمیل معتبر وارد کنید.</span>
+
+        
+        </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="form-group pb-2">
-        <label for="gender">جنسیت</label>
-        <select class="form-select" name="gender" id="gender">
-          <option value="">انتخاب کنید</option>
-          <option value="مرد">مرد</option>
-          <option value="زن">زن</option>
-        </select>
-      </div>
-      <div class="form-group pb-4">
-        <label for="email">پست الکترونیک</label>
-        <input class="form-control" type="email" name="email" id="email" />
+  
+    <div class="row justify-content-center">
+      <div class="col-md-12 pt-2 userAuth-footer">
+        <hr class="mb-5">
+        <button class="btn btn-success" ng-disabled="!user.name && !user.pass && !user.repeatpass && !user.email && !user.mobile">ذخیره</button>
+        <a class="btn btn-link btn-dismiss">انصراف</a>
       </div>
     </div>
   </div>
 
-  <div class="row justify-content-center">
-    <div class="col-md-12 pt-2 userAuth-footer">
-      <hr class="mb-5">
-      <button class="btn btn-success">ذخیره</button>
-      <a class="btn btn-link btn-dismiss">انصراف</a>
-    </div>
-  </div>
-</div>
+  </form>
+  
