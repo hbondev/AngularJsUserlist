@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <form name="CreateForm" novalidate>
+  <form name="CreateForm" novalidate ng-submit="createUser()">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="form-group pb-2">
@@ -25,8 +25,7 @@
                  name="firstName" 
                  id="firstName" 
                  ng-model="user.name" 
-                 ng-pattern="^[\u0600-\u06FF\s]+$"
-                 required />
+                  required />
           <span class="text-danger text-error d-block" ng-show="CreateForm.firstName.$invalid">
               لطفاً فقط حروف فارسی وارد کنید.
           </span>
@@ -101,7 +100,7 @@
       <div class="col-md-12 pt-2 userAuth-footer">
         <hr class="mb-5">
         <button class="btn btn-success" ng-disabled="!user.name && !user.pass && !user.repeatpass && !user.email && !user.mobile">ذخیره</button>
-        <a class="btn btn-link btn-dismiss">انصراف</a>
+        <a class="btn btn-link btn-dismiss" href="/userlist">انصراف</a>
       </div>
     </div>
   </div>
